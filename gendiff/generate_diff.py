@@ -21,6 +21,3 @@ def generate_diff(f1, f2):
         result_list.append('}')
 
         return ''.join(result_list)
-
-
-generate_diff('file1.json', 'file2.json')

@@ -1,4 +1,5 @@
 .venv/
 gendiff/__pycache__
 dist/
+tests/__pycache__
 gendiff/scripts/__pycache__
