@@ -14,5 +14,13 @@ lint:
 publish:
 	poetry publish --dry-run
 
+check:
+	poetry run flake8 gendiff
+	poetry run flake8 tests
+	poetry run pytest
+
+test-coverage:
+	poetry run pytest --cov=gendiff tests/--cov-report xml
+
 package-install:
 	python3 -m pip install dist/*.whl --force-reinstall
