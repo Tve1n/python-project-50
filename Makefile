@@ -20,7 +20,7 @@ check:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest --cov=gendiff tests/--cov-report xml
+	poetry run pytest --cov=gendiff tests/ --cov-report xml
 
 package-install:
 	python3 -m pip install dist/*.whl --force-reinstall
