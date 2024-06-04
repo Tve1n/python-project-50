@@ -11,9 +11,12 @@ def get_file_path(file):
 
 
 @pytest.mark.parametrize('file1_name, file2_name, result', [
-    ('gendiff/file1.json', 'gendiff/file2.json', 'result_generate_diff')
+    ('file1.json', 'file2.json', 'result_generate_diff'),
+    ('file1.yaml', 'file2.yaml', 'result_generate_diff')
 ])
 def test_generate_diff(file1_name, file2_name, result):
-    path = get_file_path(result)
-    with open(path, 'r') as out_res:
-        assert generate_diff(file1_name, file2_name) == out_res.read()
+    file1 = get_file_path(file1_name)
+    file2 = get_file_path(file2_name)
+    result_path = get_file_path(result)
+    with open(result_path, 'r') as out_res:
+        assert generate_diff(file1, file2) == out_res.read()
