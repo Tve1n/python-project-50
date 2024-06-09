@@ -21,4 +21,4 @@ def generate_diff(file1, file2):
 
     return ''.join(result_list)
 
-# print generate_diff('tests/fixtures/file1.json', ''tests/fixtures/file2.json')
+# print generate_diff('tests/fixtures/file1.yaml', 'tests/fixtures/file2.yaml')
