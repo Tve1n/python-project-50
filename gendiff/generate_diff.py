@@ -1,5 +1,6 @@
 from gendiff.parser import parse_data_from_file
 
+
 def generate_diff(file1, file2):
     obj_f1 = parse_data_from_file(file1)
     obj_f2 = parse_data_from_file(file2)
@@ -20,4 +21,4 @@ def generate_diff(file1, file2):
 
     return ''.join(result_list)
 
-#print(generate_diff('tests/fixtures/file1.json', ''tests/fixtures/file2.json'))
+# print generate_diff('tests/fixtures/file1.json', ''tests/fixtures/file2.json')

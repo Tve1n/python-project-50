@@ -10,6 +10,7 @@ FIXTURE_DIR = os.path.join('tests', 'fixtures')
 def get_file_path(file):
     return os.path.join(FIXTURE_DIR, file)
 
+
 @pytest.mark.parametrize('file, expect_result', [
     ('file1.json', 'expect_result_file1.json'),
     ('file1.yaml', 'expect_result_file1.json'),
