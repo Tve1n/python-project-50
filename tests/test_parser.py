@@ -1,24 +1,20 @@
 import json
 import pytest
-import os
 from gendiff.parser import parse_data_from_file
+from test_utils import get_expected_result, get_file_path
 
 
-FIXTURE_DIR = os.path.join('tests', 'fixtures')
-
-
-def get_file_path(file):
-    return os.path.join(FIXTURE_DIR, file)
-
-
-@pytest.mark.parametrize('file, expect_result', [
+@pytest.mark.parametrize('file, result', [
     ('file1.json', 'expect_result_file1.json'),
     ('file1.yaml', 'expect_result_file1.json'),
     ('file2.json', 'expect_result_file2.json'),
     ('file2.yaml', 'expect_result_file2.json')
 ])
-def test_parse_data_from_file(file, expect_result):
+def test_parse_data_from_file(file, result):
     file_path = get_file_path(file)
-    result_path = get_file_path(expect_result)
-    with open(result_path, 'r') as result:
-        assert parse_data_from_file(file_path) == json.loads(result.read())
+    result_path = get_file_path(result)
+    expect_result = get_expected_result(result_path)
+    actual_result = parse_data_from_file(file_path)
+
+    assert actual_result == json.loads(expect_result)
+

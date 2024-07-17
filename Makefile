@@ -24,3 +24,8 @@ test-coverage:
 
 package-install:
 	python3 -m pip install dist/*.whl --force-reinstall
+
+all_pack:
+	make build
+	make publish
+	make package-install

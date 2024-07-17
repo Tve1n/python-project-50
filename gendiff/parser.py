@@ -10,7 +10,7 @@ def get_format_file(file_path):  # Расширение файла
 
 def get_content_file(file_path):  # открываем файл для чтения
     with open(file_path, 'r') as file:
-        return file.read()  # Непонятный момент, зачем читаем
+        return file.read()
 
 
 def parse_data(content, format):
