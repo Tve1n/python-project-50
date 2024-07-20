@@ -1,5 +1,5 @@
 import pytest
-from gendiff.generator import(
+from gendiff.generator import (
     generate, for_add, for_delete, for_unchanged, for_modified, for_nested
 )
 
@@ -15,7 +15,7 @@ def test_for_delete():
     result = for_delete('key0', 'value0')
     assert result == {'action': 'deleted',
                       'name': 'key0',
-                      'new_value': 'key0'}
+                      'old_value': 'value0'}
 
 
 def test_for_unchanged():
@@ -42,7 +42,7 @@ def test_for_nested():
         'name': 'key4',
         'children': [
             {'action': 'unchanged', 'name': 'a', 'value': 1},
-            {'action': 'modified', 'name': 'b', 'old_value': 2,'new_value': 3},
+            {'action': 'modified', 'name': 'b', 'old_value': 2, 'new_value': 3},
             {'action': 'added', 'name': 'c', 'new_value': 4}
         ]
     }
@@ -81,7 +81,10 @@ def expected_result():
                 {'action': 'unchanged', 'name': 'setting1', 'value': 'Value 1'},
                 {'action': 'deleted', 'name': 'setting2', 'old_value': 200},
                 {'action': 'added', 'name': 'setting3', 'new_value': None},
-                {'action': 'modified', 'name': 'setting4', 'old_value': 5000, 'new_value': 'five thousand'}
+                {'action': 'modified',
+                 'name': 'setting4',
+                 'old_value': 5000,
+                 'new_value': 'five thousand'}
             ],
         },
     ]

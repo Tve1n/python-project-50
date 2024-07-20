@@ -12,9 +12,7 @@ from test_utils import get_expected_result, get_file_path
 ])
 def test_parse_data_from_file(file, result):
     file_path = get_file_path(file)
-    result_path = get_file_path(result)
-    expect_result = get_expected_result(result_path)
+    expect_result = get_expected_result(result)
     actual_result = parse_data_from_file(file_path)
 
     assert actual_result == json.loads(expect_result)
-

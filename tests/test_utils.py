@@ -10,7 +10,7 @@ def get_file_path(file):
 
 
 def read_file(file_name):
-    fixture_path = os.path.join('tests', 'fixtures', f'{file_name}')
+    fixture_path = os.path.join(FIXTURE_DIR, f'{file_name}')
     with open(fixture_path) as file:
         return file.read()
 
