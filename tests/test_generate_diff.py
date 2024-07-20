@@ -1,5 +1,4 @@
 import pytest
-import os
 from gendiff.generate_diff import generate_diff
 from test_utils import get_expected_result, get_file_path
 
