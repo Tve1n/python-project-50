@@ -9,4 +9,4 @@ def generate_diff(file1, file2, formatter='stylish'):
     diff = generate(obj_f1, obj_f2)
     return format_diff(diff, formatter)
 
-# print(generate_diff('tests/fixtures/file1.json', 'tests/fixtures/file2.json'))
+print(generate_diff('tests/fixtures/file1.json', 'tests/fixtures/file2.json', 'plain'))
