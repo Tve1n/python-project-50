@@ -23,7 +23,6 @@ def make_plain_result_item(item, path=''):  # передается элемен�
     new_value = to_str(item.get('new_value'))
     old_value = to_str(item.get('old_value'))
 
-    
     if item.get('action') == 'added':
         return f'Property "{current_path}" was added with value: {new_value}'
     elif item.get('action') == 'deleted':
@@ -45,7 +44,7 @@ def make_plain_result(diff, path=''):
         formated_item = make_plain_result_item(item, path)
         if formated_item is not None:
             result.append(formated_item)
-    
+
     return '\n'.join(result)
 
 
