@@ -21,8 +21,8 @@
             {
                 "action": "modified",
                 "name": "setting3",
-                "new_value": null,
-                "old_value": true
+                "old_value": true,
+                "new_value": null
             },
             {
                 "action": "added",
@@ -47,8 +47,8 @@
                             {
                                 "action": "modified",
                                 "name": "wow",
-                                "new_value": "so much",
-                                "old_value": ""
+                                "old_value": "",
+                                "new_value": "so much"
                             }
                         ]
                     },
@@ -73,8 +73,8 @@
             {
                 "action": "modified",
                 "name": "baz",
-                "new_value": "bars",
-                "old_value": "bas"
+                "old_value": "bas",
+                "new_value": "bars"
             },
             {
                 "action": "unchanged",
@@ -84,10 +84,10 @@
             {
                 "action": "modified",
                 "name": "nest",
-                "new_value": "str",
                 "old_value": {
                     "key": "value"
-                }
+                },
+                "new_value": "str"
             }
         ]
     },

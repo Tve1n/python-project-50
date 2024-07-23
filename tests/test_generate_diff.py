@@ -5,7 +5,11 @@ from test_utils import get_expected_result, get_file_path
 
 @pytest.mark.parametrize('file1_name, file2_name, formatter', [
     ('file1.json', 'file2.json', 'stylish'),
-    ('file1.yaml', 'file2.yaml', 'stylish')
+    ('file1.yaml', 'file2.yaml', 'stylish'),
+    ('file1.json', 'file2.json', 'plain'),
+    ('file1.yaml', 'file2.yaml', 'plain'),
+    ('file1.json', 'file2.json', 'json'),
+    ('file1.yaml', 'file2.yaml', 'json')
 ])
 def test_generate_diff(file1_name, file2_name, formatter):
     file1 = get_file_path(file1_name)
