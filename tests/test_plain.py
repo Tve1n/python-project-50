@@ -4,7 +4,7 @@ from test_utils import get_input_data, get_expected_result
 
 
 @pytest.mark.parametrize('input_value, expected_value', [
-    ('I am string', '"I am string"'),
+    ("I am string", "'I am string'"),
     (True, 'true'),
     (20000, '20000'),
     (1000.7, '1000.7'),
