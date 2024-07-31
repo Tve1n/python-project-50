@@ -8,19 +8,15 @@ def get_format_file(file_path):  # Расширение файла
     return ext[1:]
 
 
-def get_content_file(file_path):  # открываем файл для чтения
-    with open(file_path, 'r') as file:
-        return file.read()
-
-
 def parse_data(content, format):
     if format == 'json':
-        return json.loads(content)
+        return json.load(content)
     if format in ['yaml', 'yml']:
         return yaml.safe_load(content)
+    raise ValueError(f"Unsupported file format: {format}")
 
 
 def parse_data_from_file(file_path):
-    content = get_content_file(file_path)
+    content = open(file_path, 'r')
     format = get_format_file(file_path)
     return parse_data(content, format)
