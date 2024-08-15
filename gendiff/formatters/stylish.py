@@ -23,8 +23,10 @@ def to_str(value, depth):
             formated_value = to_str(inner_value, depth + 1)
             lines.append(f"{indent}{NONE}{key}: {formated_value}")
 
-        result = itertools.chain("{", lines, [get_indent(depth) + "}"])
-
+        end_ident = '' if depth == 0 else "  "
+        result = itertools.chain(
+            "{", lines, [get_indent(depth) + end_ident + "}"]
+        )
         return '\n'.join(result)
     return f"{value}"
 
@@ -53,7 +55,10 @@ def make_stylish_result(diff, depth=0):  # noqa: C901
             )
             lines.append(f"{indent}{NONE}{key_name}: {children}")
 
-    result = itertools.chain("{", lines, [get_indent(depth) + "}"])
+    end_ident = '' if depth == 0 else "  "
+    result = itertools.chain(
+        "{", lines, [get_indent(depth) + end_ident + "}"]
+    )
 
     return '\n'.join(result)
 
