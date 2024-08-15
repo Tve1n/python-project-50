@@ -4,3 +4,6 @@ dist/
 .pytest_cache
 .coverage
 gendiff/scripts/__pycache__
+gendiff/formatters/1.txt
+gendiff/formatters/2.txt
+gendiff/formatters/stylish2.py

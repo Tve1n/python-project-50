@@ -1,36 +1,44 @@
+import itertools
+
+
 SEPARATOR = " "
 ADD = '+ '
 DELETE = '- '
 NONE = '  '
 
 
-def to_str(value, spaces_count=2):
+def get_indent(depth):
+    return SEPARATOR * (depth * 4 - 2)
+
+
+def to_str(value, depth):
     if value is None:
         return "null"
     if isinstance(value, bool):
         return str(value).lower()
     if isinstance(value, dict):
-        indent = SEPARATOR * (spaces_count + 4)
+        indent = get_indent(depth + 1)
         lines = []
         for key, inner_value in value.items():
-            formated_value = to_str(inner_value, spaces_count + 4)
+            formated_value = to_str(inner_value, depth + 1)
             lines.append(f"{indent}{NONE}{key}: {formated_value}")
-        formatted_string = '\n'.join(lines)
-        end_indent = SEPARATOR * (spaces_count + 2)
-        return f"{{\n{formatted_string}\n{end_indent}}}"
+
+        result = itertools.chain("{", lines, [get_indent(depth) + "}"])
+
+        return '\n'.join(result)
     return f"{value}"
 
 
-def make_stylish_result(diff, spaces_count=2):  # noqa: C901
-    indent = SEPARATOR * spaces_count
+def make_stylish_result(diff, depth=0):  # noqa: C901
+    indent = get_indent(depth + 1)
     lines = []
     for item in diff:
         key_name = item['name']
-        old_value = to_str(item.get("old_value"), spaces_count)
-        new_value = to_str(item.get("new_value"), spaces_count)
+        old_value = to_str(item.get("old_value"), depth + 1)
+        new_value = to_str(item.get("new_value"), depth + 1)
         action = item['action']
         if action == "unchanged":
-            current_value = to_str(item.get('value'), spaces_count)
+            current_value = to_str(item.get('value'), depth)
             lines.append(f"{indent}{NONE}{key_name}: {current_value}")
         elif action == "modified":
             lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
@@ -41,13 +49,13 @@ def make_stylish_result(diff, spaces_count=2):  # noqa: C901
             lines.append(f"{indent}{ADD}{key_name}: {new_value}")
         elif action == 'nested':
             children = make_stylish_result(
-                item.get("children"), spaces_count + 4
+                item.get("children"), depth + 1
             )
             lines.append(f"{indent}{NONE}{key_name}: {children}")
-    formatted_string = '\n'.join(lines)
-    end_indent = SEPARATOR * (spaces_count - 2)
 
-    return f"{{\n{formatted_string}\n{end_indent}}}"
+    result = itertools.chain("{", lines, [get_indent(depth) + "}"])
+
+    return '\n'.join(result)
 
 
 def format_diff_stylish(data):
