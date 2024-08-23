@@ -11,9 +11,10 @@ def get_format_file(file_path):  # Расширение файла
 def parse_data(content, format):
     if format == 'json':
         return json.load(content)
-    if format in ['yaml', 'yml']:
+    elif format in ['yaml', 'yml']:
         return yaml.safe_load(content)
-    raise ValueError(f"Unsupported file format: {format}")
+    else:
+        raise Exception(f"Unsupported file format: {format}")
 
 
 def parse_data_from_file(file_path):

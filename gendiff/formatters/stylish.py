@@ -39,21 +39,24 @@ def make_stylish_result(diff, depth=0):  # noqa: C901
         old_value = to_str(item.get("old_value"), depth + 1)
         new_value = to_str(item.get("new_value"), depth + 1)
         action = item['action']
-        if action == "unchanged":
-            current_value = to_str(item.get('value'), depth)
-            lines.append(f"{indent}{NONE}{key_name}: {current_value}")
-        elif action == "modified":
-            lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
-            lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-        elif action == 'deleted':
-            lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
-        elif action == 'added':
-            lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-        elif action == 'nested':
-            children = make_stylish_result(
-                item.get("children"), depth + 1
-            )
-            lines.append(f"{indent}{NONE}{key_name}: {children}")
+        match action:
+            case "unchanged":
+                current_value = to_str(item.get('value'), depth)
+                lines.append(f"{indent}{NONE}{key_name}: {current_value}")
+            case "modified":
+                lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
+                lines.append(f"{indent}{ADD}{key_name}: {new_value}")
+            case 'deleted':
+                lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
+            case 'added':
+                lines.append(f"{indent}{ADD}{key_name}: {new_value}")
+            case 'nested':
+                children = make_stylish_result(
+                    item.get("children"), depth + 1
+                )
+                lines.append(f"{indent}{NONE}{key_name}: {children}")
+            case _:
+                raise Exception("Unknown type of action")
 
     end_ident = '' if depth == 0 else "  "
     result = itertools.chain(

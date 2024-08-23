@@ -23,19 +23,26 @@ def make_plain_result_item(item, path=''):  # передается элемен�
     new_value = to_str(item.get('new_value'))
     old_value = to_str(item.get('old_value'))
 
-    if action == 'added':
-        return f"Property '{current_path}' was added with value: {new_value}"
-    elif action == 'deleted':
-        return f"Property '{current_path}' was removed"
-    elif action == 'modified':
-        return (
-            f"Property '{current_path}' was updated. "
-            f"From {old_value} to {new_value}"
-        )
-    elif action == 'nested':
-        children = item.get('children')
-        return make_plain_result(children, current_path)
-    return None
+    match action:
+        case 'added':
+            return (
+                f"Property '{current_path}' "
+                f"was added with value: {new_value}"
+            )
+        case 'deleted':
+            return f"Property '{current_path}' was removed"
+        case 'modified':
+            return (
+                f"Property '{current_path}' was updated. "
+                f"From {old_value} to {new_value}"
+            )
+        case 'nested':
+            children = item.get('children')
+            return make_plain_result(children, current_path)
+        case 'unchanged':
+            return None
+        case _:
+            raise Exception("Unknown type of action")
 
 
 def make_plain_result(diff, path=''):
